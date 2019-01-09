@@ -1,7 +1,7 @@
 Ext.define('MyApp.view.users.UsersView',{
-	extend: 'Ext.Container',
+	extend: 'Ext.TabPanel',
 	xtype: 'tabpanel',
-//	cls: 'tabpanelview',
+	cls: 'tabpanelview',
 	controller: {type: 'usersviewcontroller'},
 	viewModel: {type: 'usersviewmodel'},
     items: [{
