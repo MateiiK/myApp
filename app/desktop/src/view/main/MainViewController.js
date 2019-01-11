@@ -9,7 +9,7 @@ Ext.define('MyApp.view.main.MainViewController', {
 	},
 
 	mainRoute:function(xtype) {
-		//var menuview = this.lookup('menuview');
+		var menuview = this.lookup('menuview');
 		var navview = this.lookup('navview');
 		var menuview = navview.items.items[0]
 

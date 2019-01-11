@@ -2,13 +2,84 @@ Ext.define('MyApp.view.users.UsersViewController', {
 	extend: 'Ext.app.ViewController',
 	alias: 'controller.usersviewcontroller',
 
-	// onItemSelected: function (sender, record) {
-	// 	Ext.Msg.confirm('Confirm', 'Are you sure?', 'onConfirm', this);
-	// },
 
-	// onConfirm: function (choice) {
-	// 	if (choice === 'yes') {
-	// 		//
-	// 	}
-	// }
+	onItemSelected: function() {
+		Ext.define('PopupForm', {
+			extend: 'Ext.form.Panel',
+			xtype: 'popupform',
+			title: 'Update Record',
+		
+			width: 300,
+			floating: true,
+			centered: true,
+			modal: true,
+		
+			items: [{
+				xtype: 'textfield',
+				name: 'firstname',
+				label: 'First Name',
+				bind: '{employee.firstName}'
+			}, {
+				xtype: 'textfield',
+				name: 'lastname',
+				label: 'Last Name',
+				bind: '{employee.lastName}'
+				
+			}, {
+				xtype: 'textfield',
+				name: 'phonenumber',
+				label: 'Phone Number',
+				bind: '{employee.phoneNumber}'
+				
+			}, {
+				xtype: 'selectfield',
+				name: 'office',
+				label: 'Office Location',
+				bind: '{employee.officeLocation}',
+				options: [{
+					text: "Redwood City, CA",
+					value: 'rwcca'
+				}, {
+					text: "Lawrence, KS",
+					value: 'lk'
+				}, {
+					text: "Frederick, MD",
+					value: 'fmd'
+				}],
+				defaultTabletPickerConfig: {
+					height: 200
+				}
+			}, {
+				xtype: 'toolbar',
+				docked: 'bottom',
+				items: ['->', {
+					xtype: 'button',
+					text: 'Submit',
+					iconCls: 'x-fa fa-check',
+					handler: 'submitUpdate'
+				}, {
+					xtype: 'button',
+					text: 'Cancel',
+					iconCls: 'x-fa fa-close',
+					handler: 'cancelUpdate'
+				}]
+			}]
+		});
+
+	},
+    cancelUpdate: function () {
+        var view = this.getView(),
+            record = view.getRecord();
+        
+        view.destroy();
+        record.reject();
+    },
+    
+    submitUpdate: function(me) {
+        var view = this.getView(),
+            record = view.getRecord();
+        
+        view.destroy();
+        record.commit();
+    }
 });
